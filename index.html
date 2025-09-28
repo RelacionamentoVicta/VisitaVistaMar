@@ -1167,10 +1167,10 @@
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'text/plain;charset=utf-8',
                     },
                     body: JSON.stringify(dados),
-                    mode: 'cors'
+                 
                 });
                 
                 console.log('Response status:', response.status);
