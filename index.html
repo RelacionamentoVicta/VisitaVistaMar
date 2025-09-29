@@ -662,10 +662,10 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>VISTA MAR CONDOMÍNIO CLUBE</h1>
-            <div class="subtitle">Visita à Obra</div>
+            <h1> VISITA À OBRA - VISTA MAR </h1>
+            <div class="subtitle">Vista Mar Condomínio Clube</div>
             <div class="address">Av. Dioguinho, 4122 - Praia do Futuro</div>
-            <div class="date">Data: 18 de outubro de 2025</div>
+            <div class="date">Data: Sábado - 18 de outubro de 2025</div>
         </div>
 
         <div class="form-wrapper">
@@ -717,7 +717,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="cpf">CPF <span class="required">*</span></label>
-                                <input type="text" id="cpf" name="cpf" required>
+                                <input type="text" id="cpf" name="cpf" required placeholder="000.000.000-00">
+                                <small id="cpf-error" style="color: red; display: none;">CPF inválido.</small>
                             </div>
                         </div>
                         <div class="form-row two-columns">
@@ -818,7 +819,7 @@
     <!-- Modal do Termo de Autorização -->
     <div id="modalTermo" class="modal">
         <div class="modal-header">
-            <h3>Termo de Responsabilidade e Autorização</h3>
+            <h3>Termo de Autorização de uso de imagem</h3>
             <button class="close-btn" id="closeModalBtn">&times;</button>
         </div>
         <div class="modal-content">
@@ -836,7 +837,7 @@
             <div class="concordo-section">
                 <div class="concordo-checkbox">
                     <input type="checkbox" id="concordo-termo-check">
-                    <label for="concordo-termo-check">Li e concordo com todos os termos de responsabilidade e segurança para a visita à obra.</label>
+                    <label for="concordo-termo-check">Li e concordo com todos os termos de uso de imagem na visita à obra.</label>
                 </div>
             </div>
         </div>
@@ -878,11 +879,10 @@
 
             // Campos condicionais
             const nomeCompleto = document.getElementById('nomeCompleto');
-            const cpf = document.getElementById('cpf');
+            const cpfInput = document.getElementById('cpf');
+            const cpfError = document.getElementById('cpf-error');
             const bloco = document.getElementById('bloco');
             const numeroApartamento = document.getElementById('numeroApartamento');
-            const autorizacaoSim = document.getElementById('autorizacao-sim');
-            const autorizacaoNao = document.getElementById('autorizacao-nao');
 
             // Modal do Termo
             const modalTermo = document.getElementById('modalTermo');
@@ -895,12 +895,51 @@
             let termoAceito = false;
             let dataHoraAceiteTermo = '';
 
+            // *** CORREÇÃO DA FUNÇÃO DE VALIDAÇÃO DE CPF ***
+            function validarCPF(cpf) {
+                cpf = String(cpf).replace(/[^\d]+/g, '');
+                if (cpf.length !== 11 || /^(\d)\1{11}$/.test(cpf)) return false;
+                let soma = 0, resto;
+                for (let i = 1; i <= 9; i++) soma = soma + parseInt(cpf.substring(i - 1, i)) * (11 - i);
+                resto = (soma * 10) % 11;
+                if ((resto === 10) || (resto === 11)) resto = 0;
+                if (resto !== parseInt(cpf.substring(9, 10))) return false;
+                soma = 0;
+                for (let i = 1; i <= 10; i++) soma = soma + parseInt(cpf.substring(i - 1, i)) * (12 - i);
+                resto = (soma * 10) % 11;
+                if ((resto === 10) || (resto === 11)) resto = 0;
+                if (resto !== parseInt(cpf.substring(10, 11))) return false;
+                return true;
+            }
+
+            function formatarCPF(cpf) {
+                cpf = cpf.replace(/\D/g, '');
+                cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+                cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+                cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                return cpf;
+            }
+
+            cpfInput.addEventListener('input', (e) => {
+                e.target.value = formatarCPF(e.target.value);
+                // A validação de erro será feita no 'blur' e no 'submit'
+            });
+
+            cpfInput.addEventListener('blur', (e) => {
+                if (e.target.value && !validarCPF(e.target.value)) {
+                    cpfError.style.display = 'block';
+                    e.target.setCustomValidity('CPF inválido.');
+                } else {
+                    cpfError.style.display = 'none';
+                    e.target.setCustomValidity('');
+                }
+            });
+
             function toggleConditionalFields(show) {
                 if (show) {
                     conditionalFields.classList.remove('hidden');
-                    // Torna os campos obrigatórios
                     nomeCompleto.required = true;
-                    cpf.required = true;
+                    cpfInput.required = true;
                     bloco.required = true;
                     numeroApartamento.required = true;
                     document.querySelector('input[name="acompanhante"]').required = true;
@@ -908,9 +947,8 @@
                     document.querySelector('input[name="autorizacaoImagem"]').required = true;
                 } else {
                     conditionalFields.classList.add('hidden');
-                    // Remove a obrigatoriedade
                     nomeCompleto.required = false;
-                    cpf.required = false;
+                    cpfInput.required = false;
                     bloco.required = false;
                     numeroApartamento.required = false;
                     document.querySelector('input[name="acompanhante"]').required = false;
@@ -922,7 +960,6 @@
             presencaSim.addEventListener('change', () => toggleConditionalFields(true));
             presencaNao.addEventListener('change', () => toggleConditionalFields(false));
 
-            // Lógica do Modal de Termo
             function abrirModalTermo() {
                 modalTermo.style.display = 'block';
                 modalOverlay.style.display = 'block';
@@ -946,16 +983,35 @@
                     termoAceito = true;
                     dataHoraAceiteTermo = new Date().toLocaleString('pt-BR');
                     fecharModalTermo();
-                    enviarParaGoogleSheets(); // Prossegue com o envio
+                    enviarParaGoogleSheets();
                 }
             });
 
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
+
+                if (presencaNao.checked) {
+                    enviarParaGoogleSheets();
+                    return;
+                }
+
+                // Força a validação de todos os campos
+                if (!form.checkValidity()) {
+                    // Dispara a UI de validação nativa do navegador
+                    form.reportValidity(); 
+                    return;
+                }
                 
+                // Validação específica do CPF
+                if (presencaSim.checked && !validarCPF(cpfInput.value)) {
+                    alert('Por favor, insira um CPF válido.');
+                    cpfInput.focus();
+                    cpfError.style.display = 'block';
+                    return;
+                }
+
                 const autorizacaoImagem = document.querySelector('input[name="autorizacaoImagem"]:checked');
 
-                // Apenas mostra o modal se a presença for 'sim' E a autorização de imagem for 'sim' E o termo ainda não foi aceito
                 if (presencaSim.checked && autorizacaoImagem && autorizacaoImagem.value === 'sim' && !termoAceito) {
                     abrirModalTermo();
                 } else {
@@ -964,12 +1020,11 @@
             });
 
             async function enviarParaGoogleSheets() {
-                // !!! IMPORTANTE: SUBSTITUA PELA URL CORRETA DA SUA NOVA IMPLANTAÇÃO !!!
-                const url = 'https://script.google.com/macros/s/AKfycbxULZ7l_GMme6l4iijHlfr0ejp1U_NFZyF_hsAqBLJ_MGDYzPgP_iXkK0Bwltr_cbtl3Q/exec'; // Substitua pela URL do seu Web App
+                const url = 'https://script.google.com/macros/s/AKfycbxULZ7l_GMme6l4iijHlfr0ejp1U_NFZyF_hsAqBLJ_MGDYzPgP_iXkK0Bwltr_cbtl3Q/exec'; // !!! SUBSTITUA PELA SUA URL !!!
                 const presenca = document.querySelector('input[name="presenca"]:checked' ).value;
 
                 let dados = {
-                    id: sessaoId, // <-- NOVO: Enviando o ID da sessão
+                    id: sessaoId,
                     presenca: presenca,
                     userAgent: navigator.userAgent,
                     url: window.location.href,
@@ -978,7 +1033,7 @@
 
                 if (presenca === 'sim') {
                     dados.nomeCompleto = nomeCompleto.value;
-                    dados.cpf = cpf.value;
+                    dados.cpf = cpfInput.value;
                     dados.bloco = bloco.value;
                     dados.numeroApartamento = numeroApartamento.value;
                     dados.acompanhante = document.querySelector('input[name="acompanhante"]:checked').value;
@@ -996,16 +1051,12 @@
                 try {
                     const response = await fetch(url, {
                         method: 'POST',
-                        mode: 'no-cors', // Importante para evitar erro de CORS com Google Scripts
+                        mode: 'no-cors',
                         cache: 'no-cache',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(dados)
                     });
 
-                    // Como estamos em modo 'no-cors', não podemos ler a resposta.
-                    // Apenas assumimos sucesso e mostramos a mensagem ao usuário.
                     console.log('Envio concluído (no-cors).');
                     mostrarMensagemSucesso(presenca, dados);
 
