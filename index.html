@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visita à Obra - Vista Mar</title>
     <style>
+        /* SEUS ESTILOS CSS PERMANECEM OS MESMOS */
         * {
             margin: 0;
             padding: 0;
@@ -43,7 +44,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1 )"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
             opacity: 0.3;
         }
 
@@ -690,130 +691,135 @@
                     <div class="section-header">Confirmação de Presença</div>
                     
                     <div class="radio-section">
-                        <h4>Confirma sua presença na visita à obra do Vista Mar? <span class="required">*</span></h4>
+                        <h4>Confirma sua presença? <span class="required">*</span></h4>
                         <div class="radio-group">
                             <div class="radio-option">
                                 <input type="radio" id="presenca-sim" name="presenca" value="sim" required>
-                                <label for="presenca-sim">Sim, irei!</label>
+                                <label for="presenca-sim">Sim, confirmo minha presença!</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="presenca-nao" name="presenca" value="nao" required>
-                                <label for="presenca-nao">Infelizmente não vou poder ir. 😔</label>
+                                <input type="radio" id="presenca-nao" name="presenca" value="nao">
+                                <label for="presenca-nao">Não poderei comparecer.</label>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Seção de campos condicionais (aparecem apenas se presença = sim) -->
-                <div id="camposCondicionais" class="conditional-fields hidden">
+                <!-- Campos que aparecem se a presença for confirmada -->
+                <div id="conditional-fields" class="conditional-fields hidden">
+                    
                     <div class="form-section">
-                        <div class="section-header">Informações Obrigatórias</div>
-                        
-                        <div class="form-row">
+                        <div class="section-header">Seus Dados</div>
+                        <div class="form-row two-columns">
                             <div class="form-group">
                                 <label for="nomeCompleto">Nome Completo <span class="required">*</span></label>
-                                <input type="text" id="nomeCompleto" name="nomeCompleto">
+                                <input type="text" id="nomeCompleto" name="nomeCompleto" required>
                             </div>
-                        </div>
-
-                        <div class="form-row">
                             <div class="form-group">
                                 <label for="cpf">CPF <span class="required">*</span></label>
-                                <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00">
+                                <input type="text" id="cpf" name="cpf" required>
                             </div>
                         </div>
-
                         <div class="form-row two-columns">
                             <div class="form-group">
                                 <label for="bloco">Bloco <span class="required">*</span></label>
-                                <input type="text" id="bloco" name="bloco">
+                                <input type="text" id="bloco" name="bloco" required>
                             </div>
                             <div class="form-group">
-                                <label for="numeroApartamento">Apartamento <span class="required">*</span></label>
-                                <input type="text" id="numeroApartamento" name="numeroApartamento">
+                                <label for="numeroApartamento">Nº do Apartamento <span class="required">*</span></label>
+                                <input type="text" id="numeroApartamento" name="numeroApartamento" required>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-section">
-                        <div class="section-header">Escolha de Horário</div>
-                        
+                        <div class="section-header">Detalhes da Visita</div>
                         <div class="radio-section">
-                            <h4>Vai levar acompanhante? <span class="required">*</span></h4>
-                            <div class="radio-description">É permitido 02 pessoas por apartamento (proprietário e acompanhante).</div>
+                            <h4>Haverá acompanhante? <span class="required">*</span></h4>
+                            <p class="radio-description">Lembre-se: apenas 1 acompanhante maior de 12 anos é permitido.</p>
                             <div class="radio-group">
                                 <div class="radio-option">
-                                    <input type="radio" id="acompanhante-sim" name="acompanhante" value="sim">
-                                    <label for="acompanhante-sim">Vou levar uma pessoa comigo!</label>
+                                    <input type="radio" id="acompanhante-sim" name="acompanhante" value="sim" required>
+                                    <label for="acompanhante-sim">Sim</label>
                                 </div>
                                 <div class="radio-option">
                                     <input type="radio" id="acompanhante-nao" name="acompanhante" value="nao">
-                                    <label for="acompanhante-nao">Vou sozinho.</label>
+                                    <label for="acompanhante-nao">Não</label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="radio-section">
-                            <h4>Para otimizar o fluxo de atendimento e evitar aglomerações, escolha o período de sua preferência: <span class="required">*</span></h4>
-                            <div class="radio-group time-options">
+                        <div class="radio-section time-options">
+                            <h4>Qual o melhor horário para sua visita? <span class="required">*</span></h4>
+                            <p class="radio-description">Escolha uma das opções disponíveis.</p>
+                            <div class="radio-group">
                                 <div class="radio-option">
-                                    <input type="radio" id="horario1" name="horario" value="08h-09h">
-                                    <label for="horario1">08:00h às 09:00h (Período da Manhã)</label>
+                                    <input type="radio" id="horario1" name="horario" value="08h-09h" required>
+                                    <label for="horario1">08:00 - 09:00</label>
                                 </div>
                                 <div class="radio-option">
                                     <input type="radio" id="horario2" name="horario" value="09h-10h">
-                                    <label for="horario2">09:00h às 10:00h (Período da Manhã)</label>
+                                    <label for="horario2">09:00 - 10:00</label>
                                 </div>
                                 <div class="radio-option">
                                     <input type="radio" id="horario3" name="horario" value="10h-11h">
-                                    <label for="horario3">10:00h às 11:00h (Meio da Manhã)</label>
+                                    <label for="horario3">10:00 - 11:00</label>
                                 </div>
                                 <div class="radio-option">
                                     <input type="radio" id="horario4" name="horario" value="11h-12h">
-                                    <label for="horario4">11:00h às 12:00h (Meio da Manhã)</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="radio-section">
-                            <h4>Autoriza o uso de imagem? <span class="required">*</span></h4>
-                            <div class="radio-description">Autorizo o uso de minha imagem em fotos, vídeos e outras mídias relacionadas ao evento.</div>
-                            <div class="radio-group">
-                                <div class="radio-option">
-                                    <input type="radio" id="autorizacao-sim" name="autorizacaoImagem" value="sim">
-                                    <label for="autorizacao-sim">Sim, autorizo o uso de imagem</label>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" id="autorizacao-nao" name="autorizacaoImagem" value="nao">
-                                    <label for="autorizacao-nao">Não autorizo o uso de imagem</label>
+                                    <label for="horario4">11:00 - 12:00</label>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-section">
+                        <div class="section-header">Autorização de Imagem</div>
+                        <div class="radio-section">
+                            <h4>Autoriza o uso de sua imagem? <span class="required">*</span></h4>
+                            <p class="radio-description">Durante o evento, faremos fotos e vídeos para registrar este momento especial. Ao concordar, você autoriza o uso desse material para fins de divulgação.</p>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="autorizacao-sim" name="autorizacaoImagem" value="sim" required>
+                                    <label for="autorizacao-sim">Sim, autorizo o uso da minha imagem.</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="autorizacao-nao" name="autorizacaoImagem" value="nao">
+                                    <label for="autorizacao-nao">Não, prefiro não ter minha imagem divulgada.</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
+                <div class="submit-section">
+                    <button type="submit" id="submit-btn" class="submit-btn">Enviar Confirmação</button>
+                </div>
+
             </form>
 
-            <div class="submit-section">
-                <button type="submit" form="visitaForm" class="submit-btn" id="submitBtn">Enviar</button>
-                
-                <div id="successMessage" class="success-message">
-                    <span class="emoji">🎉</span>
-                    <h4>Confirmado!</h4>
-                    <p>Te aguardamos no <strong>Vista Mar</strong>!</p>
-                    <p>📅 <strong>18 de outubro de 2025</strong></p>
-                    <p>🕐 Não se esqueça do seu horário escolhido</p>
-                    <p style="font-size: 0.9em; margin-top: 20px; opacity: 0.8;">Lembre-se de trazer documento com foto e usar calçado fechado!</p>
-                </div>
+            <div id="success-message" class="success-message">
+                <span class="emoji">🎉</span>
+                <h4>Confirmação Recebida!</h4>
+                <p>Agradecemos por preencher o formulário. Estamos ansiosos para recebê-lo(a) no dia da visita!</p>
+                <p id="success-details"></p>
             </div>
+
+            <div id="success-message-nao" class="success-message presenca-nao">
+                <span class="emoji">😔</span>
+                <h4>Confirmação Recebida</h4>
+                <p>Que pena que você não poderá comparecer. Agradecemos o seu retorno e esperamos vê-lo(a) em uma próxima oportunidade!</p>
+            </div>
+
         </div>
     </div>
 
     <!-- Modal do Termo de Autorização -->
-    <div class="modal-overlay" id="modalOverlay"></div>
-    <div class="modal" id="termoModal">
+    <div id="modalTermo" class="modal">
         <div class="modal-header">
-            <h3>📸 Termo de Autorização de Uso de Imagem</h3>
-            <button class="close-btn" id="closeModal">&times;</button>
+            <h3>Termo de Responsabilidade e Autorização</h3>
+            <button class="close-btn" id="closeModalBtn">&times;</button>
         </div>
         <div class="modal-content">
             <div class="termo-texto">
@@ -827,636 +833,208 @@
 
                 <p><strong>DECLARO</strong>, portanto, que estou de acordo com essas imagens, que não violam os direitos de imagem e de privacidade do cedente, e que tenho ciência que este material constituído por imagens e sons pertence exclusivamente a <strong>VICTA 01 EMPREENDIMENTOS IMOBILIARIOS LTDA</strong> e <strong>VICTA PARTICIPAÇÕES LTDA</strong>, que poderá usá-lo a seu exclusivo critério.</p>
             </div>
-
             <div class="concordo-section">
                 <div class="concordo-checkbox">
-                    <input type="checkbox" id="concordoTermo" name="concordoTermo">
-                    <label for="concordoTermo">
-                        Li e concordo com todos os termos de autorização de uso de imagem, voz e som descritos acima.
-                    </label>
+                    <input type="checkbox" id="concordo-termo-check">
+                    <label for="concordo-termo-check">Li e concordo com todos os termos de responsabilidade e segurança para a visita à obra.</label>
                 </div>
             </div>
         </div>
-
         <div class="modal-actions">
-            <button class="btn-modal btn-cancelar" id="cancelarTermo">Cancelar</button>
-            <button class="btn-modal btn-confirmar" id="confirmarTermo" disabled>Confirmar Aceite</button>
+            <button id="btn-cancelar-termo" class="btn-modal btn-cancelar">Cancelar</button>
+            <button id="btn-confirmar-termo" class="btn-modal btn-confirmar" disabled>Confirmar e Continuar</button>
         </div>
     </div>
+    <div id="modalOverlay" class="modal-overlay"></div>
 
-    <!-- Modal de Confirmação após Envio -->
-    <div class="modal-overlay" id="modalConfirmacaoOverlay"></div>
-    <div class="modal" id="modalConfirmacao">
+    <!-- Modal de Confirmação de Envio -->
+    <div id="modalConfirmacao" class="modal">
         <div class="modal-header">
-            <h3>✅ Confirmação Registrada</h3>
-            <button class="close-btn" id="closeModalConfirmacao">&times;</button>
+            <h3>Aguarde...</h3>
         </div>
         <div class="modal-content">
-            <div style="text-align: center; padding: 20px 0;">
-                <div style="font-size: 4em; margin-bottom: 20px;">🎉</div>
-                <h3 style="color: #00512A; margin-bottom: 20px;">Confirmado!</h3>
-                
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                    <p style="font-size: 1.2em; margin-bottom: 15px;"><strong>Nos encontramos no Vista Mar!</strong></p>
-                    
-                    <div style="text-align: left; margin: 15px 0;">
-                        <p>📅 <strong>Dia 18/10</strong></p>
-                        <p>🕐 <strong id="confirmacaoHorario">Horário escolhido pelo cliente</strong></p>
-                    </div>
-                    
-                    <p style="font-size: 0.9em; color: #666; margin-top: 15px;">
-                        Lembre-se de trazer documento com foto e usar calçado fechado!
-                    </p>
-                </div>
-
-                <div id="termoConfirmacaoInfo" style="background: #C5F167; padding: 15px; border-radius: 8px; margin: 15px 0; display: none;">
-                    <p style="font-size: 0.9em; color: #00512A; margin: 5px 0;">
-                        ✅ <strong>Registrado:</strong> Autoriza uso de imagem
-                    </p>
-                    <p style="font-size: 0.8em; color: #007C27; margin: 5px 0;">
-                        ✅ <strong>Termo de autorização aceito em:</strong> <span id="confirmacaoDataTermo"></span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="modal-actions">
-            <button class="btn-modal btn-confirmar" id="fecharModalConfirmacao">Fechar</button>
+            <p>Enviando suas informações. Por favor, não feche esta página.</p>
         </div>
     </div>
 
     <script>
-        // Variáveis globais para controle do termo
-        let termoAceito = false;
-        let dataHoraAceiteTermo = null;
+        // NOVO: Função para gerar um UUID (v4)
+        function gerarUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
 
-        // Variáveis para a modal de confirmação
-        const modalConfirmacaoOverlay = document.getElementById('modalConfirmacaoOverlay');
-        const modalConfirmacao = document.getElementById('modalConfirmacao');
-        const closeModalConfirmacao = document.getElementById('closeModalConfirmacao');
-        const fecharModalConfirmacao = document.getElementById('fecharModalConfirmacao');
-        const confirmacaoHorario = document.getElementById('confirmacaoHorario');
-        const termoConfirmacaoInfo = document.getElementById('termoConfirmacaoInfo');
-        const confirmacaoDataTermo = document.getElementById('confirmacaoDataTermo');
+        // NOVO: Gera e armazena o ID da sessão assim que a página carrega
+        const sessaoId = gerarUUID();
 
-        // Máscara para CPF
-        document.getElementById('cpf').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-            e.target.value = value;
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('visitaForm');
+            const presencaSim = document.getElementById('presenca-sim');
+            const presencaNao = document.getElementById('presenca-nao');
+            const conditionalFields = document.getElementById('conditional-fields');
+            const submitBtn = document.getElementById('submit-btn');
 
-        // Controle da exibição dos campos condicionais
-        document.querySelectorAll('input[name="presenca"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const camposCondicionais = document.getElementById('camposCondicionais');
-                
-                if (this.value === 'sim') {
-                    camposCondicionais.classList.remove('hidden');
-                    
-                    // Tornar os campos obrigatórios
-                    document.querySelectorAll('#camposCondicionais input[required]').forEach(input => {
-                        input.required = true;
-                    });
+            // Campos condicionais
+            const nomeCompleto = document.getElementById('nomeCompleto');
+            const cpf = document.getElementById('cpf');
+            const bloco = document.getElementById('bloco');
+            const numeroApartamento = document.getElementById('numeroApartamento');
+            const autorizacaoSim = document.getElementById('autorizacao-sim');
+            const autorizacaoNao = document.getElementById('autorizacao-nao');
+
+            // Modal do Termo
+            const modalTermo = document.getElementById('modalTermo');
+            const modalOverlay = document.getElementById('modalOverlay');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const concordoCheck = document.getElementById('concordo-termo-check');
+            const btnConfirmarTermo = document.getElementById('btn-confirmar-termo');
+            const btnCancelarTermo = document.getElementById('btn-cancelar-termo');
+
+            let termoAceito = false;
+            let dataHoraAceiteTermo = '';
+
+            function toggleConditionalFields(show) {
+                if (show) {
+                    conditionalFields.classList.remove('hidden');
+                    // Torna os campos obrigatórios
+                    nomeCompleto.required = true;
+                    cpf.required = true;
+                    bloco.required = true;
+                    numeroApartamento.required = true;
+                    document.querySelector('input[name="acompanhante"]').required = true;
+                    document.querySelector('input[name="horario"]').required = true;
+                    document.querySelector('input[name="autorizacaoImagem"]').required = true;
                 } else {
-                    camposCondicionais.classList.add('hidden');
-                    
-                    // Remover a obrigatoriedade dos campos
-                    document.querySelectorAll('#camposCondicionais input').forEach(input => {
-                        input.required = false;
-                    });
-                    
-                    // Reset termo aceito
-                    termoAceito = false;
-                    dataHoraAceiteTermo = null;
+                    conditionalFields.classList.add('hidden');
+                    // Remove a obrigatoriedade
+                    nomeCompleto.required = false;
+                    cpf.required = false;
+                    bloco.required = false;
+                    numeroApartamento.required = false;
+                    document.querySelector('input[name="acompanhante"]').required = false;
+                    document.querySelector('input[name="horario"]').required = false;
+                    document.querySelector('input[name="autorizacaoImagem"]').required = false;
+                }
+            }
+
+            presencaSim.addEventListener('change', () => toggleConditionalFields(true));
+            presencaNao.addEventListener('change', () => toggleConditionalFields(false));
+
+            // Lógica do Modal de Termo
+            function abrirModalTermo() {
+                modalTermo.style.display = 'block';
+                modalOverlay.style.display = 'block';
+            }
+
+            function fecharModalTermo() {
+                modalTermo.style.display = 'none';
+                modalOverlay.style.display = 'none';
+            }
+
+            closeModalBtn.addEventListener('click', fecharModalTermo);
+            btnCancelarTermo.addEventListener('click', fecharModalTermo);
+            modalOverlay.addEventListener('click', fecharModalTermo);
+
+            concordoCheck.addEventListener('change', () => {
+                btnConfirmarTermo.disabled = !concordoCheck.checked;
+            });
+
+            btnConfirmarTermo.addEventListener('click', () => {
+                if (concordoCheck.checked) {
+                    termoAceito = true;
+                    dataHoraAceiteTermo = new Date().toLocaleString('pt-BR');
+                    fecharModalTermo();
+                    enviarParaGoogleSheets(); // Prossegue com o envio
                 }
             });
-        });
 
-        // Controle do modal do termo de autorização
-        const modalOverlay = document.getElementById('modalOverlay');
-        const termoModal = document.getElementById('termoModal');
-        const closeModal = document.getElementById('closeModal');
-        const cancelarTermo = document.getElementById('cancelarTermo');
-        const confirmarTermo = document.getElementById('confirmarTermo');
-        const concordoTermo = document.getElementById('concordoTermo');
-
-        // Evento para quando o usuário seleciona "Sim, autorizo o uso de imagem"
-        document.getElementById('autorizacao-sim').addEventListener('change', function() {
-            if (this.checked && !termoAceito) {
-                abrirModalTermo();
-            }
-        });
-
-        // Função para abrir o modal
-        function abrirModalTermo() {
-            modalOverlay.style.display = 'block';
-            termoModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            
-            // Reset do checkbox
-            concordoTermo.checked = false;
-            confirmarTermo.disabled = true;
-        }
-
-        // Função para fechar o modal
-        function fecharModalTermo(cancelado = false) {
-            modalOverlay.style.display = 'none';
-            termoModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            
-            // Se foi cancelado e não há termo aceito, desmarcar a autorização
-            if (cancelado && !termoAceito) {
-                document.getElementById('autorizacao-nao').checked = true;
-                document.getElementById('autorizacao-sim').checked = false;
-            }
-        }
-
-        // Eventos de fechar modal
-        closeModal.addEventListener('click', () => fecharModalTermo(true));
-        cancelarTermo.addEventListener('click', () => fecharModalTermo(true));
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                fecharModalTermo(true);
-            }
-        });
-
-        // Controle do checkbox "Li e concordo"
-        concordoTermo.addEventListener('change', function() {
-            confirmarTermo.disabled = !this.checked;
-        });
-
-        // Confirmação do termo
-        confirmarTermo.addEventListener('click', function() {
-            if (concordoTermo.checked) {
-                termoAceito = true;
-                dataHoraAceiteTermo = new Date().toLocaleString('pt-BR');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                // Feedback visual
-                this.textContent = 'Aceite Confirmado ✓';
-                this.style.background = '#28a745';
-                
-                setTimeout(() => {
-                    fecharModalTermo(false);
-                    
-                    // Mostrar feedback de sucesso
-                    console.log('Termo de autorização aceito em:', dataHoraAceiteTermo);
-                    
-                    // Verificar se todos os campos obrigatórios estão preenchidos
-                    if (verificarCamposObrigatorios()) {
-                        // Se todos os campos obrigatórios estão preenchidos, mostrar modal de confirmação
-                        const horarioSelecionado = document.querySelector('input[name="horario"]:checked');
-                        const horarioFormatado = formatarHorario(horarioSelecionado ? horarioSelecionado.value : '');
-                        
-                        abrirModalConfirmacao(
-                            horarioFormatado, 
-                            true,
-                            dataHoraAceiteTermo
-                        );
-                        
-                        // Enviar formulário automaticamente
-                        enviarFormularioAutomaticamente();
-                    }
-                }, 1000);
-            }
-        });
+                const autorizacaoImagem = document.querySelector('input[name="autorizacaoImagem"]:checked');
 
-        // Função para verificar se todos os campos obrigatórios estão preenchidos
-        function verificarCamposObrigatorios() {
-            const camposObrigatorios = document.querySelectorAll('#camposCondicionais input[required]');
-            let todosPreenchidos = true;
-            
-            for (let campo of camposObrigatorios) {
-                if (!campo.value.trim()) {
-                    todosPreenchidos = false;
-                    campo.style.borderColor = '#dc3545';
+                // Apenas mostra o modal se a presença for 'sim' E a autorização de imagem for 'sim' E o termo ainda não foi aceito
+                if (presencaSim.checked && autorizacaoImagem && autorizacaoImagem.value === 'sim' && !termoAceito) {
+                    abrirModalTermo();
                 } else {
-                    campo.style.borderColor = '#6ECC01';
+                    enviarParaGoogleSheets();
                 }
-            }
-            
-            // Verificar radio buttons obrigatórios
-            const acompanhanteSelecionado = document.querySelector('input[name="acompanhante"]:checked');
-            const horarioSelecionado = document.querySelector('input[name="horario"]:checked');
-            
-            if (!acompanhanteSelecionado || !horarioSelecionado) {
-                todosPreenchidos = false;
-            }
-            
-            return todosPreenchidos;
-        }
+            });
 
-        // Função para enviar formulário automaticamente
-        async function enviarFormularioAutomaticamente() {
-            const submitBtn = document.getElementById('submitBtn');
-            const textoOriginal = submitBtn.textContent;
-            
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Enviando...';
-            
-            try {
-                // Coletar dados do formulário
+            async function enviarParaGoogleSheets() {
+                // !!! IMPORTANTE: SUBSTITUA PELA URL CORRETA DA SUA NOVA IMPLANTAÇÃO !!!
+                const url = 'https://script.google.com/macros/s/AKfycbxULZ7l_GMme6l4iijHlfr0ejp1U_NFZyF_hsAqBLJ_MGDYzPgP_iXkK0Bwltr_cbtl3Q/exec'; // Substitua pela URL do seu Web App
+                const presenca = document.querySelector('input[name="presenca"]:checked' ).value;
+
                 let dados = {
-                    timestamp: new Date().toLocaleString('pt-BR'),
-                    presenca: 'sim',
-                    nomeCompleto: document.getElementById('nomeCompleto').value,
-                    cpf: document.getElementById('cpf').value,
-                    bloco: document.getElementById('bloco').value,
-                    numeroApartamento: document.getElementById('numeroApartamento').value,
-                    acompanhante: document.querySelector('input[name="acompanhante"]:checked').value,
-                    horario: document.querySelector('input[name="horario"]:checked').value,
-                    autorizacaoImagem: 'sim',
-                    termoAceito: true,
-                    dataHoraAceiteTermo: dataHoraAceiteTermo
-                };
-                
-                console.log('Dados coletados para envio automático:', dados);
-                
-                // Enviar para Google Sheets
-                const resultado = await enviarParaGoogleSheets(dados);
-                console.log('Resultado do envio automático:', resultado);
-                
-                // Atualizar mensagem de sucesso no formulário
-                const successMessage = document.getElementById('successMessage');
-                const horarioFormatado = formatarHorario(dados.horario);
-                
-                successMessage.className = 'success-message';
-                successMessage.innerHTML = `
-                    <span class="emoji">🎉</span>
-                    <h4>Confirmado!</h4>
-                    <p><strong>Nos encontramos no Vista Mar!</strong></p>
-                    <p>📅 <strong>Dia 18/10</strong></p>
-                    <p>🕐 <strong>Horário escolhido pelo cliente: ${horarioFormatado}</strong></p>
-                    <p style="font-size: 0.9em; margin-top: 20px; opacity: 0.8;">Lembre-se de trazer documento com foto e usar calçado fechado!</p>
-                    <div style="margin-top: 15px; padding: 10px; background: rgba(110, 204, 1, 0.1); border-radius: 8px;">
-                        <p style="font-size: 0.9em; color: #007C27; margin: 5px 0;">✅ <strong>Registrado:</strong> Autoriza uso de imagem</p>
-                        <p style="font-size: 0.8em; color: #00512A; margin: 5px 0;">✅ <strong>Termo de autorização aceito em:</strong> ${dataHoraAceiteTermo}</p>
-                    </div>
-                `;
-                successMessage.style.display = 'block';
-                
-                // Limpar formulário após 10 segundos
-                setTimeout(() => {
-                    document.getElementById('visitaForm').reset();
-                    successMessage.style.display = 'none';
-                    document.getElementById('camposCondicionais').classList.add('hidden');
-                    // Reset termo
-                    termoAceito = false;
-                    dataHoraAceiteTermo = null;
-                }, 10000);
-                
-            } catch (error) {
-                console.error('Erro no envio automático:', error);
-            } finally {
-                // Reabilitar botão independente do resultado
-                submitBtn.disabled = false;
-                submitBtn.textContent = textoOriginal;
-            }
-        }
-
-        // Função para abrir a modal de confirmação
-        function abrirModalConfirmacao(horario, autorizaImagem, dataTermo) {
-            // Atualizar informações na modal
-            confirmacaoHorario.textContent = `Horário escolhido pelo cliente: ${horario}`;
-            
-            if (autorizaImagem && dataTermo) {
-                termoConfirmacaoInfo.style.display = 'block';
-                confirmacaoDataTermo.textContent = dataTermo;
-            } else {
-                termoConfirmacaoInfo.style.display = 'none';
-            }
-            
-            // Mostrar modal
-            modalConfirmacaoOverlay.style.display = 'block';
-            modalConfirmacao.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Função para fechar a modal de confirmação
-        function fecharModalConfirmacaoFn() {
-            modalConfirmacaoOverlay.style.display = 'none';
-            modalConfirmacao.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Event listeners para a modal de confirmação
-        closeModalConfirmacao.addEventListener('click', fecharModalConfirmacaoFn);
-        fecharModalConfirmacao.addEventListener('click', fecharModalConfirmacaoFn);
-        modalConfirmacaoOverlay.addEventListener('click', (e) => {
-            if (e.target === modalConfirmacaoOverlay) {
-                fecharModalConfirmacaoFn();
-            }
-        });
-
-        // Função para enviar dados para Google Sheets - VERSÃO CORRIGIDA
-        async function enviarParaGoogleSheets(dados) {
-            // ⚠️ SUBSTITUA PELA SUA URL DO DEPLOYMENT AQUI ⚠️
-            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw53-mcld47qBA6gv4f_0YfZls4ucLHAVDu_TRMbVzcg6Y_p4AGZurwfGEsHyGF770bHg/exec';
-            
-            try {
-                console.log('Enviando dados:', dados);
-                
-                // Adicionar informações extras
-                dados.userAgent = navigator.userAgent;
-                dados.url = window.location.href;
-                dados.timestamp = new Date().toLocaleString('pt-BR', {
-                    timeZone: 'America/Sao_Paulo'
-                });
-                
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8',
-                    },
-                    body: JSON.stringify(dados),
-                 
-                });
-                
-                console.log('Response status:', response.status);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                
-                const responseText = await response.text();
-                console.log('Response text:', responseText);
-                
-                let resultado;
-                try {
-                    resultado = JSON.parse(responseText);
-                } catch (parseError) {
-                    console.error('Erro ao fazer parse da resposta:', parseError);
-                    // Mesmo com erro de parse, considerar sucesso para não quebrar o fluxo
-                    resultado = { success: true, message: 'Dados enviados (resposta não parseável)' };
-                }
-                
-                console.log('Resultado processado:', resultado);
-                
-                // Sempre retornar sucesso para manter o comportamento atual do site
-                return resultado.success !== false ? resultado : { success: true, message: 'Dados processados' };
-                
-            } catch (error) {
-                console.error('Erro na requisição:', error);
-                
-                // Para manter o comportamento do site, sempre retornar sucesso
-                // mesmo em caso de erro (o importante é tentar enviar)
-                return { 
-                    success: true, 
-                    message: 'Dados processados',
-                    note: 'Erro capturado: ' + error.message
-                };
-            }
-        }
-
-        // Função para converter horário para formato de exibição
-        function formatarHorario(horario) {
-            if (!horario) return '';
-            
-            const horarios = {
-                '08h-09h': '08:00h às 09:00h',
-                '09h-10h': '09:00h às 10:00h',
-                '10h-11h': '10:00h às 11:00h',
-                '11h-12h': '11:00h às 12:00h'
-            };
-            
-            return horarios[horario] || horario;
-        }
-
-        // Manipulação do formulário
-        document.getElementById('visitaForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const presenca = document.querySelector('input[name="presenca"]:checked');
-            
-            // Validação básica
-            if (!presenca) {
-                alert('Por favor, selecione se confirma presença ou não.');
-                return;
-            }
-            
-            // Se o termo já foi aceito e todos os campos estão preenchidos, não enviar novamente
-            if (presenca.value === 'sim' && termoAceito && verificarCamposObrigatorios()) {
-                console.log('Formulário já foi enviado automaticamente após aceite do termo');
-                return;
-            }
-            
-            // Desabilitar botão e mudar texto
-            const textoOriginal = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Enviando...';
-            
-            try {
-                // Coletar dados básicos
-                let dados = {
-                    timestamp: new Date().toLocaleString('pt-BR'),
-                    presenca: presenca.value,
-                    nomeCompleto: '',
-                    cpf: '',
-                    bloco: '',
-                    numeroApartamento: '',
-                    acompanhante: '',
-                    horario: '',
-                    autorizacaoImagem: '',
-                    termoAceito: false,
-                    dataHoraAceiteTermo: ''
+                    id: sessaoId, // <-- NOVO: Enviando o ID da sessão
+                    presenca: presenca,
+                    userAgent: navigator.userAgent,
+                    url: window.location.href,
+                    timestamp: new Date().toLocaleString('pt-BR')
                 };
 
-                // Se presença for "sim", validar e coletar campos condicionais
-                if (presenca.value === 'sim') {
-                    let camposValidos = true;
-                    const mensagensErro = [];
-                    
-                    // Validar campos de texto
-                    const nomeCompleto = document.getElementById('nomeCompleto');
-                    const cpf = document.getElementById('cpf');
-                    const bloco = document.getElementById('bloco');
-                    const numeroApartamento = document.getElementById('numeroApartamento');
-                    
-                    if (!nomeCompleto.value.trim()) {
-                        nomeCompleto.style.borderColor = '#dc3545';
-                        mensagensErro.push('Nome Completo é obrigatório');
-                        camposValidos = false;
-                    } else {
-                        nomeCompleto.style.borderColor = '#6ECC01';
-                        dados.nomeCompleto = nomeCompleto.value.trim();
-                    }
-                    
-                    if (!cpf.value.trim()) {
-                        cpf.style.borderColor = '#dc3545';
-                        mensagensErro.push('CPF é obrigatório');
-                        camposValidos = false;
-                    } else {
-                        cpf.style.borderColor = '#6ECC01';
-                        dados.cpf = cpf.value.trim();
-                    }
-                    
-                    if (!bloco.value.trim()) {
-                        bloco.style.borderColor = '#dc3545';
-                        mensagensErro.push('Bloco é obrigatório');
-                        camposValidos = false;
-                    } else {
-                        bloco.style.borderColor = '#6ECC01';
-                        dados.bloco = bloco.value.trim();
-                    }
-                    
-                    if (!numeroApartamento.value.trim()) {
-                        numeroApartamento.style.borderColor = '#dc3545';
-                        mensagensErro.push('Número do Apartamento é obrigatório');
-                        camposValidos = false;
-                    } else {
-                        numeroApartamento.style.borderColor = '#6ECC01';
-                        dados.numeroApartamento = numeroApartamento.value.trim();
-                    }
-                    
-                    // Validar radio buttons
-                    const acompanhante = document.querySelector('input[name="acompanhante"]:checked');
-                    const horario = document.querySelector('input[name="horario"]:checked');
-                    const autorizacaoImagem = document.querySelector('input[name="autorizacaoImagem"]:checked');
-                    
-                    if (!acompanhante) {
-                        mensagensErro.push('Selecione se vai levar acompanhante');
-                        camposValidos = false;
-                    } else {
-                        dados.acompanhante = acompanhante.value;
-                    }
-                    
-                    if (!horario) {
-                        mensagensErro.push('Selecione um horário');
-                        camposValidos = false;
-                    } else {
-                        dados.horario = horario.value;
-                    }
-                    
-                    if (!autorizacaoImagem) {
-                        mensagensErro.push('Selecione a autorização de imagem');
-                        camposValidos = false;
-                    } else {
-                        dados.autorizacaoImagem = autorizacaoImagem.value;
-                        
-                        // Validação especial para autorização de imagem com termo
-                        if (autorizacaoImagem.value === 'sim' && !termoAceito) {
-                            mensagensErro.push('É necessário aceitar o termo de autorização de uso de imagem');
-                            camposValidos = false;
-                        }
-                    }
-                    
-                    // Dados do termo
+                if (presenca === 'sim') {
+                    dados.nomeCompleto = nomeCompleto.value;
+                    dados.cpf = cpf.value;
+                    dados.bloco = bloco.value;
+                    dados.numeroApartamento = numeroApartamento.value;
+                    dados.acompanhante = document.querySelector('input[name="acompanhante"]:checked').value;
+                    dados.horario = document.querySelector('input[name="horario"]:checked').value;
+                    dados.autorizacaoImagem = document.querySelector('input[name="autorizacaoImagem"]:checked').value;
                     dados.termoAceito = termoAceito;
-                    dados.dataHoraAceiteTermo = dataHoraAceiteTermo || '';
-                    
-                    if (!camposValidos) {
-                        alert('Por favor, corrija os seguintes erros:\n\n' + mensagensErro.join('\n'));
-                        return;
-                    }
+                    dados.dataHoraAceiteTermo = dataHoraAceiteTermo;
                 }
-                
-                console.log('Dados coletados:', dados);
-                
-                // Enviar para Google Sheets
-                const resultado = await enviarParaGoogleSheets(dados);
-                console.log('Resultado do envio:', resultado);
-                
-                // Sempre considerar sucesso (devido ao mode: 'no-cors')
-                const successMessage = document.getElementById('successMessage');
-                
-                if (dados.presenca === 'nao') {
-                    // Mensagem para quem não vai
-                    successMessage.className = 'success-message presenca-nao';
-                    successMessage.innerHTML = `
-                        <span class="emoji">😔</span>
-                        <h4>Que pena!</h4>
-                        <p>Que pena que você não poderá ir.</p>
-                        <p><strong>Nos veremos em breve!</strong></p>
-                        <p style="font-size: 1.1em; margin-top: 15px;">Sua resposta foi registrada com sucesso. 📝</p>
-                    `;
-                    successMessage.style.display = 'block';
-                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                } else {
-                    // Mensagem para quem vai - MOSTRAR MODAL DE CONFIRMAÇÃO
-                    const horarioFormatado = formatarHorario(dados.horario);
-                    abrirModalConfirmacao(
-                        horarioFormatado, 
-                        dados.autorizacaoImagem === 'sim' && termoAceito,
-                        dataHoraAceiteTermo
-                    );
-                    
-                    // Também atualizar a mensagem de sucesso no formulário
-                    successMessage.className = 'success-message';
-                    successMessage.innerHTML = `
-                        <span class="emoji">🎉</span>
-                        <h4>Confirmado!</h4>
-                        <p><strong>Nos encontramos no Vista Mar!</strong></p>
-                        <p>📅 <strong>Dia 18/10</strong></p>
-                        <p>🕐 <strong>Horário escolhido pelo cliente: ${horarioFormatado}</strong></p>
-                        <p style="font-size: 0.9em; margin-top: 20px; opacity: 0.8;">Lembre-se de trazer documento com foto e usar calçado fechado!</p>
-                        ${dados.autorizacaoImagem === 'sim' && termoAceito ? 
-                            `<div style="margin-top: 15px; padding: 10px; background: rgba(110, 204, 1, 0.1); border-radius: 8px;">
-                                <p style="font-size: 0.9em; color: #007C27; margin: 5px 0;">✅ <strong>Registrado:</strong> Autoriza uso de imagem</p>
-                                <p style="font-size: 0.8em; color: #00512A; margin: 5px 0;">✅ <strong>Termo de autorização aceito em:</strong> ${dataHoraAceiteTermo}</p>
-                            </div>` 
-                            : 
-                            dados.autorizacaoImagem === 'nao' ? 
-                            '<p style="font-size: 0.9em; color: #8B4513; margin-top: 10px;">✅ Registrado: Não autoriza uso de imagem</p>' 
-                            : ''
-                        }
-                    `;
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Enviando...';
+                document.getElementById('modalConfirmacao').style.display = 'block';
+                modalOverlay.style.display = 'block';
+
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        mode: 'no-cors', // Importante para evitar erro de CORS com Google Scripts
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(dados)
+                    });
+
+                    // Como estamos em modo 'no-cors', não podemos ler a resposta.
+                    // Apenas assumimos sucesso e mostramos a mensagem ao usuário.
+                    console.log('Envio concluído (no-cors).');
+                    mostrarMensagemSucesso(presenca, dados);
+
+                } catch (error) {
+                    console.error('Erro ao enviar:', error);
+                    alert('Ocorreu um erro ao enviar seus dados. Por favor, tente novamente.');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Enviar Confirmação';
+                    document.getElementById('modalConfirmacao').style.display = 'none';
+                    modalOverlay.style.display = 'none';
                 }
-                
-                // Limpar formulário após 10 segundos
-                setTimeout(() => {
-                    this.reset();
-                    successMessage.style.display = 'none';
-                    document.getElementById('camposCondicionais').classList.add('hidden');
-                    // Reset termo
-                    termoAceito = false;
-                    dataHoraAceiteTermo = null;
-                }, 10000);
-                
-            } catch (error) {
-                console.error('Erro no envio:', error);
-                alert('Erro ao enviar formulário. Tente novamente.');
-            } finally {
-                // Reabilitar botão independente do resultado
-                submitBtn.disabled = false;
-                submitBtn.textContent = textoOriginal;
             }
-        });
 
-        // Melhorar acessibilidade dos radio buttons
-        document.querySelectorAll('.radio-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const radio = this.querySelector('input[type="radio"]');
-                if (radio && !radio.checked) {
-                    radio.checked = true;
-                    radio.dispatchEvent(new Event('change'));
-                }
-            });
-        });
+            function mostrarMensagemSucesso(presenca, dados) {
+                form.style.display = 'none';
+                document.querySelector('.intro-section').style.display = 'none';
+                document.querySelector('.info-section').style.display = 'none';
 
-        // Validação em tempo real
-        document.querySelectorAll('input[required]').forEach(input => {
-            input.addEventListener('blur', function() {
-                if (this.value.trim() === '') {
-                    this.style.borderColor = '#dc3545';
+                if (presenca === 'sim') {
+                    document.getElementById('success-message').style.display = 'block';
+                    document.getElementById('success-details').innerHTML = `<strong>Nome:</strong> ${dados.nomeCompleto}  
+<strong>Horário:</strong> ${dados.horario}`;
                 } else {
-                    this.style.borderColor = '#6ECC01';
-                }
-            });
-        });
-
-        // Tecla ESC para fechar modal
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                if (termoModal.style.display === 'block') {
-                    fecharModalTermo(true);
-                }
-                if (modalConfirmacao.style.display === 'block') {
-                    fecharModalConfirmacaoFn();
+                    document.getElementById('success-message-nao').style.display = 'block';
                 }
             }
         });
     </script>
+
 </body>
 </html>
